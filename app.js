@@ -69,7 +69,7 @@
   });
   updateProgress();
 
-  const navLinks = [...document.querySelectorAll('.side-nav a')];
+  const navLinks = [...document.querySelectorAll('.side-nav a[href^="#"]')];
   const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
