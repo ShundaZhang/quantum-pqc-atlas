@@ -8,4 +8,6 @@
 
 量子基础、Bell 态、Shor 和 Grover 的[站内导读](quantum-guide.html)可直接阅读，不需要外部量子平台账号。本地 Bell 实验运行 `python3 labs/bell_state.py`，只使用 Python 标准库。外部课程仅作为可选延伸阅读。
 
+[代码实验路径](code-labs.html)把 `quantum-computing-python-samples` 和 `lattice-based-cryptography-samples` 两个公开仓库编成六个关卡；网站提供运行步骤和实验边界，仓库继续维护源码。
+
 内容最后核对：2026-09-24。标准与协议状态可能变化，请以网站中的一手资料链接为准。
