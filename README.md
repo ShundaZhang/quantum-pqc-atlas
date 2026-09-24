@@ -10,4 +10,6 @@
 
 [代码实验路径](code-labs.html)把 `quantum-computing-python-samples` 和 `lattice-based-cryptography-samples` 两个公开仓库编成六个关卡；网站提供运行步骤和实验边界，仓库继续维护源码。
 
+格密码已有独立的[格密码地图](https://shundazhang.github.io/lattice-crypto-atlas/)，本网站保留一页速览并引导深入。
+
 内容最后核对：2026-09-24。标准与协议状态可能变化，请以网站中的一手资料链接为准。
