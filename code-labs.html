@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10182d">
+  <meta name="description" content="把量子计算与格基密码学代码仓库编成可执行学习路径：Bell、Grover、相位估计、格、Toy LWE 与参数攻击。">
+  <title>代码实验路径 · Quantum / PQC Atlas</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="guide.css">
+  <link rel="stylesheet" href="code-labs.css">
+</head>
+<body class="guide-page">
+  <a class="skip" href="#main">跳至正文</a>
+  <header class="guide-topbar"><a class="guide-brand" href="index.html">Q+ <span>QUANTUM / PQC ATLAS</span></a><a href="index.html#practice">返回实验清单 ↗</a></header>
+  <main id="main">
+    <section class="guide-hero"><span class="eyebrow"><i></i> FROM MODEL TO RUNNABLE CODE</span><h1>把概念跑起来。<br><em>再看它的边界。</em></h1><p>从这个网站的无依赖 Bell 实验出发，接着运行你公开仓库里的 Qiskit 本地模拟和纯 Python 格密码玩具代码。每一步都写清“要观察什么”和“不能据此推断什么”。</p><nav class="guide-jumps" aria-label="本页章节"><a href="#map">如何选择</a><a href="#quantum-code">量子线路</a><a href="#lattice-code">格与 LWE</a><a href="#bridge">接回安全主线</a></nav></section>
+
+    <section class="guide-section" id="map"><div class="guide-heading"><span>00 / CHOOSE YOUR DEPTH</span><h2>按目标挑实验</h2></div><div class="code-map"><article><span>START / 无依赖</span><h3>Bell 状态向量</h3><p>只用 Python 标准库，先确认 H、CX、概率和采样的关系。</p><a href="quantum-guide.html#bell">先做本站实验 ↗</a></article><article><span>QUANTUM / 本地模拟</span><h3>Qiskit Python 示例</h3><p>沿 Bell → Grover → 相位估计走，理解量子算法的线路与输出。</p><a href="#quantum-code">查看三个代码关卡 ↗</a></article><article><span>PQC / 纯 Python</span><h3>格基密码示例</h3><p>沿二维格 → Toy LWE → Tiny 参数攻击走，建立安全参数直觉。</p><a href="#lattice-code">查看三个代码关卡 ↗</a></article></div><p class="guide-callout"><b>两个仓库的定位</b>：<a href="https://github.com/ShundaZhang/quantum-computing-python-samples" target="_blank" rel="noopener noreferrer">quantum-computing-python-samples</a> 是量子线路与算法的教学模拟；<a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples" target="_blank" rel="noopener noreferrer">lattice-based-cryptography-samples</a> 是格、LWE 和密码分析的教学实现。它们分别回答“量子威胁怎样工作”和“抗量子方案依赖什么困难问题”。</p></section>
+
+    <section class="guide-section guide-dark" id="quantum-code"><div class="guide-heading"><span>01 / QISKIT LOCAL SIMULATOR</span><h2>量子线路：Bell → Grover → QPE</h2></div><p>这个仓库使用 Qiskit 与本地 Aer 模拟器。<b>运行以下三个示例不需要云端量子平台账号或 API token</b>；首次安装需要能从 Python 包源获取依赖。项目声明支持 Python 3.10–3.13。</p><div class="code-command"><span>在独立目录中运行</span><pre><code>git clone https://github.com/ShundaZhang/quantum-computing-python-samples.git
+cd quantum-computing-python-samples
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+python examples/02_bell_entanglement.py
+python examples/06_grover_search.py
+python examples/07_phase_estimation.py</code></pre><small>Windows PowerShell 可用 <code>.venv\Scripts\Activate.ps1</code> 激活虚拟环境。</small></div><div class="code-steps"><article><div><span>01 / BELL</span><h3>先对照振幅与 counts</h3><p>看 <code>statevector</code> 中的 00/11 振幅，再看多次测量的 <code>counts</code>。理想线路只应出现 00、11；这仍不是单靠直方图“证明纠缠”。</p></div><a href="https://github.com/ShundaZhang/quantum-computing-python-samples/blob/main/examples/02_bell_entanglement.py" target="_blank" rel="noopener noreferrer">查看示例源码 ↗</a></article><article><div><span>02 / GROVER</span><h3>把四项手算变成线路</h3><p>示例标记 <code>10</code>，一次 Grover 迭代后应将它放大为主要结果。改动目标值，再核对 oracle 与 bitstring 的显示顺序。</p></div><a href="https://github.com/ShundaZhang/quantum-computing-python-samples/blob/main/examples/06_grover_search.py" target="_blank" rel="noopener noreferrer">查看示例源码 ↗</a></article><article><div><span>03 / QPE</span><h3>从相位读出 011</h3><p>相位估计示例把 3/8 编码为三位二进制 <code>011</code>。这是理解 Shor 周期寻找中“相位估计”构件的桥梁，<b>该脚本本身不是 Shor 分解实现</b>。</p></div><a href="https://github.com/ShundaZhang/quantum-computing-python-samples/blob/main/examples/07_phase_estimation.py" target="_blank" rel="noopener noreferrer">查看示例源码 ↗</a></article></div><p class="code-more">继续深入：<a href="https://github.com/ShundaZhang/quantum-computing-python-samples/blob/main/docs/example_walkthrough_zh.md" target="_blank" rel="noopener noreferrer">逐例中文讲解 ↗</a> · <a href="https://github.com/ShundaZhang/quantum-computing-python-samples/blob/main/docs/shor_algorithm_zh.md" target="_blank" rel="noopener noreferrer">Shor 算法图解 ↗</a> · <a href="https://github.com/ShundaZhang/quantum-computing-python-samples/blob/main/docs/quantum_ctf_zh.md" target="_blank" rel="noopener noreferrer">Quantum CTF 攻防视角 ↗</a>。仓库中还有隐形传态、VQE、噪声与综合流程，可在掌握前三关后选做。</p></section>
+
+    <section class="guide-section" id="lattice-code"><div class="guide-heading"><span>02 / PURE PYTHON TOY CRYPTO</span><h2>格与 LWE：看见“难”在哪里</h2></div><p>这组实验只需要 Python 3.10+，无需第三方包。它让你在很小的参数上看清格点、噪声、解密与暴力搜索；随后再回到 ML-KEM / ML-DSA 标准。</p><div class="code-command light"><span>在另一个独立目录中运行</span><pre><code>git clone https://github.com/ShundaZhang/lattice-based-cryptography-samples.git
+cd lattice-based-cryptography-samples
+python3 examples/01_lattice_basics.py
+python3 examples/03_toy_lwe_encrypt.py
+python3 examples/04_tiny_lwe_attack.py
+python3 -m unittest discover -s tests</code></pre></div><div class="code-steps light"><article><div><span>01 / GEOMETRY</span><h3>枚举二维格的短向量</h3><p>改变两个基向量，观察格点、行列式与短向量如何变化。先学会区分“基”与“它生成的格”。</p></div><a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples/blob/main/examples/01_lattice_basics.py" target="_blank" rel="noopener noreferrer">查看示例源码 ↗</a></article><article><div><span>02 / LWE</span><h3>让小噪声参与加解密</h3><p>观察 <code>phase</code> 与解密位。尝试调大噪声，记录何时开始解密错误，再解释正确性与安全性的权衡。</p></div><a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples/blob/main/examples/03_toy_lwe_encrypt.py" target="_blank" rel="noopener noreferrer">查看示例源码 ↗</a></article><article><div><span>03 / ATTACK</span><h3>暴力恢复极小的秘密</h3><p>示例故意使用 <code>n=2, q=17</code>。留意 <code>qⁿ</code> 候选数怎样增长；不要把这个 toy 攻击等同于对标准参数 ML-KEM 的有效攻击。</p></div><a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples/blob/main/examples/04_tiny_lwe_attack.py" target="_blank" rel="noopener noreferrer">查看示例源码 ↗</a></article></div><p class="code-more">先补直觉可读：<a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples/blob/main/docs/intuitive-explanation.md" target="_blank" rel="noopener noreferrer">格密码直观解释 ↗</a> · <a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples/blob/main/docs/visual-guide.md" target="_blank" rel="noopener noreferrer">图解 ↗</a> · <a href="https://github.com/ShundaZhang/lattice-based-cryptography-samples/blob/main/docs/exercises.md" target="_blank" rel="noopener noreferrer">习题 ↗</a>。LLL 与 CTF 例子属于进阶选读。</p></section>
+
+    <section class="guide-section guide-paper" id="bridge"><div class="guide-heading"><span>03 / CONNECT BACK TO SECURITY</span><h2>从玩具模型回到安全决策</h2></div><div class="code-bridge"><div><b>量子侧</b><p>Bell 解释测量与纠缠，Grover 解释无结构搜索加速，QPE 为 Shor 的周期寻找建立构件直觉。</p></div><span aria-hidden="true">→</span><div><b>密码侧</b><p>Toy LWE 解释带噪声问题和参数取舍；它不是 ML-KEM 的实现。真实迁移仍要读标准、选成熟库并做协议验证。</p></div><span aria-hidden="true">→</span><div><b>系统侧</b><p>把 KEM、签名、TLS、证书、固件和远程证明纳入资产清单；以保密期与迁移成本排序。</p></div></div><div class="code-warning"><strong>实验边界</strong><p>两个仓库的密码与量子代码都用于教学。格密码的极小参数、固定种子、暴力搜索以及缺少常数时间和侧信道防护的实现，不能保护真实数据；Qiskit 模拟结果也不能代表物理硬件的攻击能力。</p></div><div class="guide-actions"><a class="guide-button" href="index.html#standards">回到 NIST 标准 ↗</a><a class="guide-button ghost" href="index.html#migration">查看迁移清单 ↗</a></div></section>
+  </main>
+  <footer class="guide-footer"><a href="index.html">← 返回 Quantum / PQC Atlas</a><span>仓库内容核对：2026.09.24 · 运行前以各仓库 README 为准</span></footer>
+</body>
+</html>
