@@ -1,9 +1,10 @@
 (() => {
+  const zh = document.documentElement.lang.startsWith('zh');
   const steps = [
-    { state: '|00⟩', values: [100, 0, 0, 0], text: '初态 |00⟩：测量必得 00。' },
-    { state: '(|00⟩ + |10⟩) / √2', values: [50, 0, 50, 0], text: 'H 作用于 q₀：理想测量时，00 与 10 各约占一半。' },
-    { state: '(|00⟩ + |11⟩) / √2', values: [50, 0, 0, 50], text: 'CX 将 q₀ 与 q₁ 关联：理想测量只出现 00 或 11。' },
-    { state: '00 或 11', values: [50, 0, 0, 50], text: '一次测量只得到 00 或 11 中的一个；重复运行才看到接近 50/50 的分布。' }
+    { state: '|00⟩', values: [100, 0, 0, 0], text: zh ? '初态 |00⟩：测量必得 00。' : 'Initial state |00⟩: measurement always yields 00.' },
+    { state: '(|00⟩ + |10⟩) / √2', values: [50, 0, 50, 0], text: zh ? 'H 作用于 q₀：理想测量时，00 与 10 各约占一半。' : 'Apply H to q₀: ideal measurements yield 00 and 10 with equal probability.' },
+    { state: '(|00⟩ + |11⟩) / √2', values: [50, 0, 0, 50], text: zh ? 'CX 将 q₀ 与 q₁ 关联：理想测量只出现 00 或 11。' : 'CX entangles q₀ and q₁: ideal measurements yield only 00 or 11.' },
+    { state: zh ? '00 或 11' : '00 or 11', values: [50, 0, 0, 50], text: zh ? '一次测量只得到 00 或 11 中的一个；重复运行才看到接近 50/50 的分布。' : 'One measurement yields either 00 or 11; repeated runs reveal an approximately 50/50 distribution.' }
   ];
   const stepButtons = [...document.querySelectorAll('.step-btn')];
   const barIds = ['00', '01', '10', '11'];
@@ -58,7 +59,7 @@
   progressInputs.forEach(input => { input.checked = saved.includes(input.dataset.progress); });
   function updateProgress() {
     const completed = progressInputs.filter(input => input.checked).map(input => input.dataset.progress);
-    document.getElementById('progress-text').textContent = `${completed.length} / ${progressInputs.length} 已完成`;
+    document.getElementById('progress-text').textContent = `${completed.length} / ${progressInputs.length} ${zh ? '已完成' : 'completed'}`;
     document.getElementById('progress-bar').style.width = `${completed.length / progressInputs.length * 100}%`;
     try { localStorage.setItem(storageKey, JSON.stringify(completed)); } catch (_) { /* Browsing without persistent storage still works. */ }
   }
