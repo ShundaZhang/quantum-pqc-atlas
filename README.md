@@ -13,3 +13,12 @@
 格密码已有独立的[格密码地图](https://shundazhang.github.io/lattice-crypto-atlas/)，本网站保留一页速览并引导深入。
 
 内容最后核对：2026-09-24。标准与协议状态可能变化，请以网站中的一手资料链接为准。
+
+## Algorithm expansion - 2026-11-05
+
+- [PQC algorithm details](pqc-algorithms.html) / [Chinese](pqc-algorithms.zh.html): ML-KEM, ML-DSA, SLH-DSA, FN-DSA/Falcon, HQC, LMS/XMSS; mechanisms, diagrams, current status and implementation boundaries.
+- Expanded the existing Shor/Grover guide sections, preserving their bookmarks.
+- 11 original bilingual diagrams and two local teaching models: ideal phase-sample postprocessing and exact Grover amplitudes/probabilities. Neither connects to quantum hardware or implements a cryptanalytic attack.
+- HQC follows the project specification of 2026-10-12. FIPS 206 remains in development; HQC selection is distinguished from publication of a NIST standard. LMS/XMSS are linked to SP 800-208 and RFC 8554/8391.
+
+Build the additions with `python3 -B build_learning.py` (standard library only). Run model tests with `node --test tests/algorithm-models.test.mjs`. Older, unrelated chapters retain their own review dates.
