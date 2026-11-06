@@ -25,6 +25,9 @@ def refs(lang,*ids):
     return '<p class="algorithm-references">'+t('Primary sources: ','一手资料：')+' · '.join(f'<a href="{SOURCES[i][1]}" target="_blank" rel="noopener noreferrer">{SOURCES[i][0]} ↗</a>' for i in ids)+'</p>'
 def table(head,rows):return '<div class="algorithm-table-wrap" tabindex="0"><table class="algorithm-table"><thead><tr>'+''.join('<th scope="col">'+s+'</th>' for s in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join(('<th scope="row">' if i==0 else '<td>')+cell+('</th>' if i==0 else '</td>') for i,cell in enumerate(row))+'</tr>' for row in rows)+'</tbody></table></div>'
 def section(lang,ident,number,title,body):
+    if ident in ('landscape','ml-kem','ml-dsa','slh-dsa','fn-dsa','hqc','stateful'):
+        from pqc_interfaces import interfaces
+        body=interfaces(lang,ident)+body
     return f'<section class="guide-section algorithm-section" id="{ident}"><div class="guide-heading"><span>{number} / ALGORITHM FIELD NOTES</span><h2>{title}</h2></div>{body}</section>'
 def summary_rows(lang,linked=True):
     t=translator(lang)

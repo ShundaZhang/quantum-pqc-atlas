@@ -18,7 +18,11 @@
 
 - [PQC algorithm details](pqc-algorithms.html) / [Chinese](pqc-algorithms.zh.html): ML-KEM, ML-DSA, SLH-DSA, FN-DSA/Falcon, HQC, LMS/XMSS; mechanisms, diagrams, current status and implementation boundaries.
 - Expanded the existing Shor/Grover guide sections, preserving their bookmarks.
-- 11 original bilingual diagrams and two local teaching models: ideal phase-sample postprocessing and exact Grover amplitudes/probabilities. Neither connects to quantum hardware or implements a cryptanalytic attack.
+- 18 original bilingual diagrams (including seven key/output object diagrams) and two local teaching models: ideal phase-sample postprocessing and exact Grover amplitudes/probabilities. Neither connects to quantum hardware or implements a cryptanalytic attack.
 - HQC follows the project specification of 2026-10-12. FIPS 206 remains in development; HQC selection is distinguished from publication of a NIST standard. LMS/XMSS are linked to SP 800-208 and RFC 8554/8391.
 
 Build the additions with `python3 -B build_learning.py` (standard library only). Run model tests with `node --test tests/algorithm-models.test.mjs`. Older, unrelated chapters retain their own review dates.
+
+## Explicit key and output structures
+
+Each of ML-KEM, ML-DSA, SLH-DSA, Falcon, HQC, LMS and XMSS now has its own public/private/output diagram, field-by-field table and KeyGen plus two-operation pseudocode. LMS and XMSS are separate subsections with their own state and signature formats. The 21 pseudocode operations use native disclosure controls: KeyGen is initially open, and encapsulation/signing plus decapsulation/verification can be expanded. Pseudocode is pedagogical and keeps specification-defined encodings, validation, domain separation and helper routines explicit.
