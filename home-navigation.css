@@ -1,0 +1,13 @@
+/* Personal-home navigation is distinct from the learning atlas index. */
+#atlas-langbar .atlas-home-link {
+  margin-right: auto;
+  min-width: 0;
+  padding: 4px 8px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  #atlas-langbar { padding-left: 8px; padding-right: 8px; }
+}
